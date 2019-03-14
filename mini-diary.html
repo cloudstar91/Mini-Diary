@@ -1,46 +1,111 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Mini Diary</title>
-        <!-- favicon -->
-        <link rel="shortcut icon" href="https://www.hubspot.com/hubfs/HSLogo_sprocket_color_png-1.png">
-        <!-- boostrap -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel=“stylesheet” type=“text/css” media=“screen” href=“mini-diary.css” />
-    </head>
-  <body> 
-        <nav class="nav">
-                <a class="nav-link active" href="#">Active</a>
-                <a class="nav-link" href="#">Link</a>
-                <a class="nav-link" href="#">Link</a>
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </nav>
-     <div class= "container">
-         <div class ="row">
-             <div class = "col-4">
-                <div id = "userInfo"></div>
-                <div id = "highLight"></div>
-                <div id = "hasTag"></div>
-                <div id = "Friends"></div>
-             </div>
-             <div class = "col-8">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Mini Diary</title>
+    <!-- favicon -->
+    <link
+      rel="shortcut icon"
+      href="https://www.hubspot.com/hubfs/HSLogo_sprocket_color_png-1.png"
+    />
+    <!-- boostrap -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
 
-            </div>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="mini-diary.css"
+    />
 
-         </div>
-        
+    <link rel="stylesheet" type="text/css" media="screen" href="others.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <a class="nav-link active" href="#">Home</a>
+      <a class="nav-link" href="#">Discover</a>
+      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
+        >Disabled</a
+      >
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <div id="userInfo"></div>
+          <div id="highLight"></div>
+          <div id="hasTag"></div>
+          <div id="Friends"></div>
         </div>
-        <footer>
-            
-        </footer>
+        <div class="col-8"></div>
+      </div>
+    </div>
 
+    <footer>
+      <div class="container pt-2 mt-2 border-top border-success">
+        <div class="row pt-1">
+          <div class="col-lg-3 col-md-6 d-flex">
+            <ul class="list-group">
+              <li class="list-group-item border-0 bg-transparent">
+                <p class="extra_text text-uppercase minion-font">Resources</p>
+              </li>
 
+              <li class="list-group-item border-0 bg-transparent pb-0">
+                <a href="#" class="text-dark">Venue & Tickets</a>
+              </li>
+              <li class="list-group-item border-0 bg-transparent pb-0">
+                <a href="#" class="text-dark">Venue & Tickets</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 d-flex">
+            <ul class="list-group">
+              <li class="list-group-item border-0 bg-transparent">
+                <p class="extra_text text-uppercase minion-font">Help Center</p>
+              </li>
+              <li class="list-group-item border-0 bg-transparent pb-0">
+                <a href="#" class="text-dark">Venue & Tickets</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row pt-4 justify-content-start mt-5">
+          <p class="">
+            Copyright © 2019 Two App Studio Pte. Ltd., Singapore
+          </p>
 
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>  
-        <script scr= "mini-diary.js"></script>
-</body>
+          <p>
+            Journey is a registered trademark ® and trademark™ of Two App Studio
+            Pte. Ltd
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script scr="mini-diary.js"></script>
+  </body>
 </html>
