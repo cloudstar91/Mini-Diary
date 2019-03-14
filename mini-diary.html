@@ -26,29 +26,54 @@
       media="screen"
       href="mini-diary.css"
     />
-
     <link rel="stylesheet" type="text/css" media="screen" href="others.css" />
-  </head>
-  <body>
-    <nav class="nav">
-      <a class="nav-link active" href="#">Home</a>
-      <a class="nav-link" href="#">Discover</a>
-      <a class="nav-link" href="#">Link</a>
-      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
-        >Disabled</a
-      >
-    </nav>
-    <div class="container">
-      <div class="row">
-        <div class="col-4">
-          <div id="userInfo"></div>
-          <div id="highLight"></div>
-          <div id="hasTag"></div>
-          <div id="Friends"></div>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Mini Diary</title>
+        <!-- favicon -->
+        <link rel="shortcut icon" href="https://www.hubspot.com/hubfs/HSLogo_sprocket_color_png-1.png">
+        <!-- boostrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" media="screen" href="mini-diary.css" />
+    </head>
+  
+    <body> 
+        <div class= "container">
+            <nav class="nav">
+                <a class="nav-link active" href="#">Active</a>
+                <a class="nav-link" href="#">Link</a> 
+                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </nav>
         </div>
-        <div class="col-8"></div>
-      </div>
-    </div>
+     <div class= "container">
+         <div class ="row">
+             <div class = "col-4 border">
+                <div id = "userInfo" class= "border">userInfo</div>
+                <div id = "highLight" class= "border">highLight</div>
+                <div id = "hasTag" class= "border">hasTag</div>
+                <div id = "Friends" class= "border">Friends</div>
+             </div>
+             <div class = "col-8 border">
+                <div id = "inputText" class = "border" >
+                    <div class="input-group mb-3">
+                            <span><img src="..." class="rounded float-left" alt="..."></span>
+                            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                            </div>
+                    </div>
+                    <div id="charRemaining">140 Characters Remaining</div>
+                </div>
+                <div id = "outputText" class = "border" >Ouput Text</div>
+                
+            </div>
+
+    
+</div>  
+  
+   
 
     <footer>
       <div class="container pt-2 mt-2 border-top border-success">
@@ -108,4 +133,5 @@
     ></script>
     <script scr="mini-diary.js"></script>
   </body>
+
 </html>
