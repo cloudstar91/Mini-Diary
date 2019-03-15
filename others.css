@@ -76,8 +76,8 @@ body {
 
 /* Set a style for the submit/login button */
 .form-container .btn {
-  background-color: #4caf50;
-  color: white;
+  background-color: #757575;
+  color: rgb(255, 255, 255);
   padding: 16px 20px;
   border: none;
   cursor: pointer;
@@ -86,7 +86,17 @@ body {
   opacity: 0.8;
 }
 
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: rgb(194, 194, 194);
+}
+
+/* Add some hover effects to buttons */
 .form-container .btn:hover,
 .open-button:hover {
   opacity: 1;
+}
+
+.blogName {
+  font-size: 40px;
 }

@@ -32,6 +32,7 @@ let tweetButton = document.getElementById("tweetButton");
 let dateTweet = "";
 let retweet = "null";
 let likeText = "";
+let hashTags = "";
 
 let onUserInput = () => {
   console.log("string");
@@ -59,7 +60,8 @@ function generatePost() {
       tweet: valueInput,
       time: dateTweet,
       like: false,
-      retweet: retweet
+      retweet: retweet,
+      hashTag: hashTags
     });
     // id++;
     console.log(tweetArr);
@@ -71,8 +73,9 @@ function generatePost() {
 }
 
 function removeItem(index) {
+  // if (tweetArr.filter(item => item.id == id)) {
+  // } else {
   tweetArr.splice(index, 1);
-
   render();
 }
 
@@ -92,7 +95,7 @@ function retweetFunction(id) {
   let parLike = false;
   let ParRetweet = parentTweet.id;
 
-  tweetArr.push({
+  tweetArr.unshift({
     id: parID,
     tweet: parTweet,
     time: parTime,
@@ -104,7 +107,20 @@ function retweetFunction(id) {
   render();
 }
 
+// function createHashtag(string) {
+//   let hashTagText = [];
+//   if (string.indexOf("#") == 0) {
+//     hashTagText = string.match(/#(\w+)/g);
+//     if (hashTagText.length === string.length)
+//       return ` <a href=""> ${hashTagText} </a>`;
+//   }
+//   if (hashTagText.length < string.length) {
+//     return ` <a href=""> ${hashTagText} </a>` + "abc";
+//   } else return `<p> ${string}</p>`;
+// }
+
 function render() {
+  let userName = document.getElementById("userInputName").value;
   tweetHTML = "";
   charCount.innerHTML = `<span class="${addClass(
     numCharRemain
@@ -122,24 +138,32 @@ function render() {
     tweetHTML += `<div class="card">
               <div class="card-body">
                 <span><img class="img-radius" src="img/sampleava.jpg"></span>
-                <span class="card-title">User Name</span>
+                <span class="card-title">${userName}</span>
                 <h6 class="card-subtitle my-3 text-muted">${moment(
                   item.time
                 ).format("DD-MM-YY hh:mm:ss A")} <span>(posted ${moment(
       item.time
     ).fromNow()})</h6>
                 <p class="card-text border">
-                  ${item.tweet}
+                   ${item.tweet}
                 </p>
-
-                <div class="d-flex flex-row justify-content-between">
+                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between">
+                <div class="mr-3">
                 <a href="" onclick='toggleLike(${index})'>${likeText}</a>
+                </div>
                 <a href="#"  class="card-link"> <img src="img/commenticon.png"></a>
                 <span class="card-link" onclick=retweetFunction(${
                   item.id
                 })><img src="img/retweet.png"></span>
                 <a href="#" class="card-link"> <img src="img/staricon.png"></a>
+                </div>
+
+
+                <div class="d-flex flex-row">
                 <span><img  src="img/bin2.png" onclick='removeItem(${index})'></span>
+                </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -165,26 +189,32 @@ console.log(numCharRemain);
 //     count.classList.remove("text-success");
 //     count.classList.add("text-danger");
 // }
-render();
+
 tweetText.addEventListener("input", onUserInput);
 tweetButton.addEventListener("click", generatePost);
 
-// function openForm() {
-//   document.getElementById("myForm").style.display = "block";
-// }
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
 
-// function closeForm() {
-//   document.getElementById("myForm").style.display = "none";
-// }
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
 
-// let displayName = document.getElementById("userName");
-// let logInButton = document.getElementById("loginBtn");
-// let userNameInput = document.getElementById("userInputName").value;
+let logInButton = document.getElementById("loginBtn");
 
-// function logIn() {
-//   displayName.innerHTML = userNameInput;
-//   closeForm();
-//   render();
-// }
+function logIn(e) {
+  e.preventDefault();
+  console.log(document.getElementById("userInputName"));
+  let userNameInput = document.getElementById("userInputName").value;
+  console.log(userNameInput);
+  let displayName = document.getElementById("userName");
+  if (userNameInput !== "") {
+    displayName.innerHTML = userNameInput;
+    closeForm("myForm");
+    render();
+  }
+}
 
-// logInButton.addEventListener("click", logIn);
+logInButton.addEventListener("click", logIn);
+render();
