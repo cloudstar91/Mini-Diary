@@ -9,9 +9,15 @@
 //   // FILL ME IN
 // }
 let tweetArr = [];
+let id;
 
 if (localStorage.getItem("tweetArray") !== null) {
   tweetArr = JSON.parse(localStorage.getItem("tweetArray"));
+  let a = tweetArr.map(item => item.id);
+  let b = a.pop();
+  id = b + 1;
+} else {
+  id = 0;
 }
 let tweetText = document.getElementById("inputText");
 const MAX_NUM_CHARS = 10;
@@ -25,7 +31,6 @@ let tweetButton = document.getElementById("tweetButton");
 let dateTweet = "";
 let retweet = "null";
 let likeText = "";
-let id = 0;
 
 let onUserInput = () => {
   console.log("string");
@@ -45,9 +50,6 @@ function generatePost() {
   let valueInput = tweetText.innerText;
   if (valueInput === "") {
     alert("pls enter");
-  } else if (valueInput.length >= MAX_NUM_CHARS) {
-    document.getElementById("tweetButton").disabled = true;
-    tweetText.className = "text-input";
   } else if (valueInput !== "" && valueInput.length < MAX_NUM_CHARS) {
     dateTweet = new Date();
     tweetArr.unshift({
@@ -57,7 +59,7 @@ function generatePost() {
       like: false,
       retweet: retweet
     });
-    id += 1;
+    id++;
     console.log(tweetArr);
     render();
     tweetText.innerHTML = "";
@@ -96,8 +98,8 @@ function render() {
     tweetHTML += `<div class="card">
               <div class="card-body">
                 <span><img class="img-radius" src="img/sampleava.jpg"></span>
-                <h5 class="card-title">User Name</h5>
-                <h6 class="card-subtitle mb-2 text-muted">${moment(
+                <span class="card-title">User Name</span>
+                <h6 class="card-subtitle my-3 text-muted">${moment(
                   item.time
                 ).format("DD-MM-YY hh:mm:ss A")} <span>(posted ${moment(
       item.time
@@ -107,9 +109,11 @@ function render() {
                 </p>
 
                 <div class="d-flex flex-row justify-content-between">
-                <a href="#" onclick='toggleLike(${index})'>${likeText}</a>
+                <a href="" onclick='toggleLike(${index})'>${likeText}</a>
                 <a href="#"  class="card-link"> <img src="img/commenticon.png"></a>
-                <a href="#" class="card-link"> <img src="img/retweet.png"></a>
+                <span class="card-link" onclick=retweet(${
+                  item.id
+                })><img src="img/retweet.png"></span>
                 <a href="#" class="card-link"> <img src="img/staricon.png"></a>
                 <span><img  src="img/bin2.png" onclick='removeItem(${index})'></span>
                 </div>
@@ -119,14 +123,17 @@ function render() {
 
     // `<li class="list-group-item TodoListStyle align-self-start" ><span><img src="#" onclick='removeItem(${index})'>${item}</span></li>\n`;
   });
-
   tweetSection.innerHTML = tweetHTML;
   localStorage.setItem("tweetArray", JSON.stringify(tweetArr));
 }
 
 function addClass(textLimit) {
   if (textLimit < 0) {
+    tweetButton.disabled = true;
     return "text-danger";
+  }
+  if (textLimit > 0) {
+    tweetButton.disabled = false;
   }
 }
 console.log(numCharRemain);
@@ -138,24 +145,22 @@ render();
 tweetText.addEventListener("input", onUserInput);
 tweetButton.addEventListener("click", generatePost);
 
-function openForm() {
-  document.getElementById("myForm").style.display = "block";
-}
+// function openForm() {
+//   document.getElementById("myForm").style.display = "block";
+// }
 
-function closeForm() {
-  document.getElementById("myForm").style.display = "none";
-  document.getElementById("openBtn").style.display = "none";
-}
+// function closeForm() {
+//   document.getElementById("myForm").style.display = "none";
+// }
 
-let logInButton = document.getElementById("loginBtn");
-var displayName = document.getElementById("userName");
-let userInputName = "";
+// let displayName = document.getElementById("userName");
+// let logInButton = document.getElementById("loginBtn");
+// let userNameInput = document.getElementById("userInputName").value;
 
-function logIn() {
-  let userNameInput = document.getElementById("userInputName").value;
-  displayName.innerText = userNameInput;
-  closeForm();
-  render();
-}
+// function logIn() {
+//   displayName.innerHTML = userNameInput;
+//   closeForm();
+//   render();
+// }
 
-logInButton.addEventListener("click", logIn);
+// logInButton.addEventListener("click", logIn);
