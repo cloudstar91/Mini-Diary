@@ -9,16 +9,17 @@
 //   // FILL ME IN
 // }
 let tweetArr = [];
-let id;
+// let id;
 
 if (localStorage.getItem("tweetArray") !== null) {
   tweetArr = JSON.parse(localStorage.getItem("tweetArray"));
-  let a = tweetArr.map(item => item.id);
-  let b = a.pop();
-  id = b + 1;
-} else {
-  id = 0;
 }
+// let a = tweetArr.map(item => item.id);
+// let b = a.pop();
+// id = b + 1;
+// } else {
+//   id = 0;
+// }
 let tweetText = document.getElementById("inputText");
 const MAX_NUM_CHARS = 10;
 let numCharRemain = MAX_NUM_CHARS;
@@ -53,30 +54,53 @@ function generatePost() {
   } else if (valueInput !== "" && valueInput.length < MAX_NUM_CHARS) {
     dateTweet = new Date();
     tweetArr.unshift({
-      id: id,
+      id: dateTweet.getTime(),
+      // id: id,
       tweet: valueInput,
       time: dateTweet,
       like: false,
       retweet: retweet
     });
-    id++;
+    // id++;
     console.log(tweetArr);
     render();
     tweetText.innerHTML = "";
     valueInput = "";
   }
-
   render();
 }
 
 function removeItem(index) {
   tweetArr.splice(index, 1);
+
   render();
 }
 
 function toggleLike(index) {
   tweetArr[index].like = !tweetArr[index].like;
   console.log(index);
+  render();
+}
+
+function retweetFunction(id) {
+  let parentTweet = tweetArr.find(item => item.id == id);
+  console.log("p", parentTweet);
+  let parID = parentTweet.id;
+  let parTime = new Date();
+  let parTweet = parentTweet.tweet;
+  console.log(parTime);
+  let parLike = false;
+  let ParRetweet = parentTweet.id;
+
+  tweetArr.push({
+    id: parID,
+    tweet: parTweet,
+    time: parTime,
+    like: parLike,
+    retweet: ParRetweet
+  });
+
+  console.log(tweetArr);
   render();
 }
 
@@ -90,9 +114,9 @@ function render() {
 
   newArr.map((item, index) => {
     if (item.like) {
-      likeText = "Like";
-    } else {
       likeText = "Unlike";
+    } else {
+      likeText = "Like";
     }
 
     tweetHTML += `<div class="card">
@@ -111,7 +135,7 @@ function render() {
                 <div class="d-flex flex-row justify-content-between">
                 <a href="" onclick='toggleLike(${index})'>${likeText}</a>
                 <a href="#"  class="card-link"> <img src="img/commenticon.png"></a>
-                <span class="card-link" onclick=retweet(${
+                <span class="card-link" onclick=retweetFunction(${
                   item.id
                 })><img src="img/retweet.png"></span>
                 <a href="#" class="card-link"> <img src="img/staricon.png"></a>
@@ -132,7 +156,7 @@ function addClass(textLimit) {
     tweetButton.disabled = true;
     return "text-danger";
   }
-  if (textLimit > 0) {
+  if (textLimit >= 0) {
     tweetButton.disabled = false;
   }
 }
