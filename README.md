@@ -2,7 +2,7 @@
 
 Created with love by: Anh, Vuong, and Huy
   
-View online at: `Your URL here`
+View online at: https://ftw-mini-diary.netlify.com/
   
 One or two sentence summary of your project. 
 
