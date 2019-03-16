@@ -14,6 +14,7 @@ let tweetText = document.getElementById("inputText");
 const MAX_NUM_CHARS = 140;
 let numCharRemain = MAX_NUM_CHARS;
 let charCount = document.getElementById("charRemaining");
+let numOfTweets = document.getElementById("totalTweet");
 
 let tweetHTML = "";
 let tweetSection = document.getElementById("outputText");
@@ -30,7 +31,7 @@ let onUserInput = () => {
   numCharRemain = MAX_NUM_CHARS - textLength;
   console.log(textLength);
   console.log(numCharRemain);
-  render();
+  render(tweetArr);
 };
 
 // if (textLength > MAX_NUM_CHARS) {
@@ -67,11 +68,11 @@ function generatePost() {
     // id++;
     console.log(tweetArr);
     console.log("hashTags: ", hashTags);
-    render();
+    render(tweetArr);
     tweetText.innerHTML = "";
     valueInput = "";
   }
-  render();
+  // render();
 }
 
 function removeItem(index, id) {
@@ -81,14 +82,14 @@ function removeItem(index, id) {
     }
   });
   tweetArr = a;
-  tweetArr.splice(index, 1);
-  render();
+  // tweetArr.splice(index, 1);
+  render(tweetArr);
 }
 
 function toggleLike(index) {
   tweetArr[index].like = !tweetArr[index].like;
   console.log(index);
-  render();
+  render(tweetArr);
 }
 
 function retweetFunction(id) {
@@ -112,7 +113,7 @@ function retweetFunction(id) {
   });
 
   console.log(tweetArr);
-  render();
+  render(tweetArr);
 }
 
 // function createHashtag(string) {
@@ -128,7 +129,7 @@ function retweetFunction(id) {
 // }
 let tagText = document.getElementById("hashTagHTML");
 
-function render() {
+function render(data) {
   let userName = document.getElementById("userInputName").value;
   tweetHTML = "";
   tagHTML = "";
@@ -138,7 +139,7 @@ function render() {
   )}">  ${numCharRemain} characters remaining</span>`;
 
   let result = {};
-  let newArr = tweetArr;
+  let newArr = data;
 
   newArr.map((item, index) => {
     if (item.like) {
@@ -204,22 +205,25 @@ function render() {
   console.log(tagHTML);
   tagText.innerHTML = tagHTML;
   tweetSection.innerHTML = tweetHTML;
+  numOfTweets.innerHTML = `Tweets:<span class="text-success"> ${
+    tweetArr.length
+  } </span>`;
 
   localStorage.setItem("tweetArray", JSON.stringify(tweetArr));
 }
 
 // let isShowAll = true;
 // let isFilter = false;
-// function showAll() {
-//   showAll = true;
-//   console.log("here");
-//   render();
-// }
+function showAll() {
+  //showAll = true;
+  //console.log("here");
+  render(tweetArr);
+}
 
 function filterTags(tag) {
-  isFilter == true;
-  tweetArr = tweetArr.filter(item => item.hashTag == tag);
-  render();
+  //isFilter == true;
+  let tweetFilteredByTags = tweetArr.filter(item => item.hashTag == tag);
+  render(tweetFilteredByTags);
 }
 
 function addClass(textLimit) {
@@ -254,9 +258,9 @@ function logIn(e) {
   if (userNameInput !== "") {
     displayName.innerHTML = userNameInput;
     closeForm("myForm");
-    render();
+    render(tweetArr);
   }
 }
 
 logInButton.addEventListener("click", logIn);
-render();
+render(tweetArr);
