@@ -140,10 +140,6 @@ function render() {
   let result = {};
   let newArr = tweetArr;
 
-  if (isShowAll == true) {
-    newArr = tweetArr;
-  }
-
   newArr.map((item, index) => {
     if (item.like) {
       likeText = "Unlike";
@@ -212,13 +208,13 @@ function render() {
   localStorage.setItem("tweetArray", JSON.stringify(tweetArr));
 }
 
-let isShowAll = true;
-let isFilter = false;
-function showAll() {
-  showAll = true;
-  console.log("here");
-  render();
-}
+// let isShowAll = true;
+// let isFilter = false;
+// function showAll() {
+//   showAll = true;
+//   console.log("here");
+//   render();
+// }
 
 function filterTags(tag) {
   isFilter == true;
