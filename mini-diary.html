@@ -57,10 +57,12 @@
         </div>
       </nav>
     </div>
-    <div class="container pl-5">
+    <div class="container pl-4">
       <div class="row">
-        <div class="col-4">
-          <div class="row">
+        <div
+          class="col-xl-4 col-lg-4 order-xl-first order-lg-first order-md-last order-sm-last order-last "
+        >
+          <div class="row ">
             <div id="userInfo">
               <div class="card" style="width: 20rem;">
                 <img
@@ -70,21 +72,26 @@
                 />
                 <div class="card-body">
                   <h5 id="userName" class="card-title">USER NAME</h5>
-                  <p class="card-text"></p>
-                  <a href="#" class="btn btn-primary"></a>
+                  <p class="card-text font-italic">
+                    "The best for preparation tomorrow is doing you best today."
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row ">
             <div id="highLight" class="card ">
               <div class="card" style="width: 20rem;">
-                <div class="card-header">#TAGS</div>
+                <div class="card-header">
+                  <span class=" mr-5">#TAGS </span
+                  ><span class="ml-5"
+                    ><a onclick="showAll()" href="">Show All</a></span
+                  >
+                </div>
+
                 <div class="card-body">
-                  <h5 class="card-text">Ligtle</h5>
-                  <p class="card-text">
-                    Somke up the bulk of the card's content.
-                  </p>
+                  <h5 class="card-text">Most Recent</h5>
+                  <p id="hashTagHTML" class="card-text"></p>
                 </div>
               </div>
             </div>
@@ -92,11 +99,29 @@
           <div class="row">
             <div id="hashtags" class="card ">
               <div class="card" style="width: 20rem;">
-                <div class="card-header">Friends</div>
+                <div class="card-header">FRIENDS</div>
                 <div class="card-body">
-                  <h5 class="card-text">Ligtle</h5>
                   <p class="card-text">
-                    Somke up the bulk of the card's content.
+                    <img
+                      class="img-radius mx-2"
+                      src="img/sampleava.jpg"
+                      alt="ava"
+                    />
+                    <img
+                      class="img-radius mx-2"
+                      src="img/sampleava.jpg"
+                      alt="ava"
+                    />
+                    <img
+                      class="img-radius mx-2"
+                      src="img/sampleava.jpg"
+                      alt="ava"
+                    />
+                    <img
+                      class="img-radius mx-2"
+                      src="img/sampleava.jpg"
+                      alt="ava"
+                    />
                   </p>
                 </div>
               </div>
@@ -105,20 +130,20 @@
           <div class="row">
             <div id="friends" class="card ">
               <div class="card" style="width: 20rem;">
-                <div class="card-header">Hashtags</div>
+                <div class="card-header">TRENDING</div>
                 <div class="card-body">
-                  <h5 class="card-text">Ligtle</h5>
-                  <p class="card-text">
-                    Somke up the bulk of the card's content.
-                  </p>
+                  <h5 class="card-text"></h5>
+                  <p class="card-text"></p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-8">
+        <div
+          class="col-xl-8 col-lg-8 order-xl-last order-lg-last order-md-first order-sm-first order-first"
+        >
           <div class="border">
-            <div class="input-group mb-3">
+            <div class="input-group my-3 float-lg-right ">
               <span
                 ><img
                   class="img-radius"

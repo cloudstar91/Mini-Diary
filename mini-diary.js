@@ -1,13 +1,3 @@
-// function addTweet() {
-//   // FILL ME IN
-//   let div = document.getElementById("tweets-list");
-//   let tweet = generateTweetHtml("hello world");
-//   div.innerHTML = tweet += div.innerHTML;
-// }
-
-// function updateCharacterCount() {
-//   // FILL ME IN
-// }
 let tweetArr = [];
 // let id;
 
@@ -21,7 +11,7 @@ if (localStorage.getItem("tweetArray") !== null) {
 //   id = 0;
 // }
 let tweetText = document.getElementById("inputText");
-const MAX_NUM_CHARS = 10;
+const MAX_NUM_CHARS = 140;
 let numCharRemain = MAX_NUM_CHARS;
 let charCount = document.getElementById("charRemaining");
 
@@ -32,7 +22,7 @@ let tweetButton = document.getElementById("tweetButton");
 let dateTweet = "";
 let retweet = "null";
 let likeText = "";
-let hashTags = "";
+let hashTags = [];
 
 let onUserInput = () => {
   console.log("string");
@@ -48,11 +38,22 @@ let onUserInput = () => {
 // } else {
 //   tweetText.className = "";
 // }
+function extractTags(str) {
+  var words = str.split(" ");
+  var tags = [];
+  for (var i = 0; i < words.length; i++) {
+    if (words[i][0] === "#") {
+      tags.push(words[i]);
+    }
+  }
+  return tags;
+}
 function generatePost() {
   let valueInput = tweetText.innerText;
   if (valueInput === "") {
     alert("pls enter");
   } else if (valueInput !== "" && valueInput.length < MAX_NUM_CHARS) {
+    hashTags = extractTags(valueInput);
     dateTweet = new Date();
     tweetArr.unshift({
       id: dateTweet.getTime(),
@@ -65,6 +66,7 @@ function generatePost() {
     });
     // id++;
     console.log(tweetArr);
+    console.log("hashTags: ", hashTags);
     render();
     tweetText.innerHTML = "";
     valueInput = "";
@@ -72,9 +74,13 @@ function generatePost() {
   render();
 }
 
-function removeItem(index) {
-  // if (tweetArr.filter(item => item.id == id)) {
-  // } else {
+function removeItem(index, id) {
+  var a = tweetArr.filter(item => {
+    if (item.id !== id) {
+      return item;
+    }
+  });
+  tweetArr = a;
   tweetArr.splice(index, 1);
   render();
 }
@@ -94,13 +100,15 @@ function retweetFunction(id) {
   console.log(parTime);
   let parLike = false;
   let ParRetweet = parentTweet.id;
+  let hashTag = parentTweet.hashTag;
 
   tweetArr.unshift({
     id: parID,
     tweet: parTweet,
     time: parTime,
     like: parLike,
-    retweet: ParRetweet
+    retweet: ParRetweet,
+    hashTag: hashTag
   });
 
   console.log(tweetArr);
@@ -118,15 +126,23 @@ function retweetFunction(id) {
 //     return ` <a href=""> ${hashTagText} </a>` + "abc";
 //   } else return `<p> ${string}</p>`;
 // }
+let tagText = document.getElementById("hashTagHTML");
 
 function render() {
   let userName = document.getElementById("userInputName").value;
   tweetHTML = "";
+  tagHTML = "";
+
   charCount.innerHTML = `<span class="${addClass(
     numCharRemain
   )}">  ${numCharRemain} characters remaining</span>`;
 
+  let result = {};
   let newArr = tweetArr;
+
+  if (isShowAll == true) {
+    newArr = tweetArr;
+  }
 
   newArr.map((item, index) => {
     if (item.like) {
@@ -147,10 +163,13 @@ function render() {
                 <p class="card-text border">
                    ${item.tweet}
                 </p>
+                <p>
+                <a href='javascript:void();'>${item.hashTag.map(k => k)}</a>
+                </p>
                 <div class="d-flex justify-content-between">
                 <div class="d-flex justify-content-between">
                 <div class="mr-3">
-                <a href="" onclick='toggleLike(${index})'>${likeText}</a>
+                <a href="javascript:void();" onclick='toggleLike(${index})'>${likeText}</a>
                 </div>
                 <a href="#"  class="card-link"> <img src="img/commenticon.png"></a>
                 <span class="card-link" onclick=retweetFunction(${
@@ -161,7 +180,9 @@ function render() {
 
 
                 <div class="d-flex flex-row">
-                <span><img  src="img/bin2.png" onclick='removeItem(${index})'></span>
+                <span><img  src="img/bin2.png" onclick='removeItem(${index}, ${
+      item.id
+    })'></span>
                 </div>
                 </div>
                 </div>
@@ -169,10 +190,40 @@ function render() {
             </div>
             \n`;
 
-    // `<li class="list-group-item TodoListStyle align-self-start" ><span><img src="#" onclick='removeItem(${index})'>${item}</span></li>\n`;
+    item.hashTag.map(item => {
+      if (result[item]) {
+        result[item]++;
+      } else {
+        result[item] = 1;
+      }
+    });
   });
+  console.log(result);
+
+  for (var key in result) {
+    tagHTML += `<span> <a onClick='filterTags("${key}")'href='#'>${key}</a> (${
+      result[key]
+    })</span>`;
+  }
+  console.log(tagHTML);
+  tagText.innerHTML = tagHTML;
   tweetSection.innerHTML = tweetHTML;
+
   localStorage.setItem("tweetArray", JSON.stringify(tweetArr));
+}
+
+let isShowAll = true;
+let isFilter = false;
+function showAll() {
+  showAll = true;
+  console.log("here");
+  render();
+}
+
+function filterTags(tag) {
+  isFilter == true;
+  tweetArr = tweetArr.filter(item => item.hashTag == tag);
+  render();
 }
 
 function addClass(textLimit) {
@@ -184,11 +235,6 @@ function addClass(textLimit) {
     tweetButton.disabled = false;
   }
 }
-console.log(numCharRemain);
-// if (numCharRemain < 0) {
-//     count.classList.remove("text-success");
-//     count.classList.add("text-danger");
-// }
 
 tweetText.addEventListener("input", onUserInput);
 tweetButton.addEventListener("click", generatePost);
@@ -205,9 +251,9 @@ let logInButton = document.getElementById("loginBtn");
 
 function logIn(e) {
   e.preventDefault();
-  console.log(document.getElementById("userInputName"));
+  // console.log(document.getElementById("userInputName"));
   let userNameInput = document.getElementById("userInputName").value;
-  console.log(userNameInput);
+  // console.log(userNameInput);
   let displayName = document.getElementById("userName");
   if (userNameInput !== "") {
     displayName.innerHTML = userNameInput;
