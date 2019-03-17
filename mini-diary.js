@@ -5,7 +5,7 @@ let isLogin = false;
 if (localStorage.getItem("tweetArray") !== null) {
   tweetArr = JSON.parse(localStorage.getItem("tweetArray"));
 }
-//
+
 async function fetchData() {
   if (isLogin == false) {
     return;
@@ -15,8 +15,14 @@ async function fetchData() {
 
   let response = await fetch(url);
   let data = await response.json();
-  tweetArr = data.arrayApi;
-  render(tweetArr);
+  let tweetFakeArr = data.arrayApi;
+  let tweet = [];
+  if (tweetArr.length !== 0) {
+    tweet = tweetArr.concat(tweetFakeArr);
+    render(tweet);
+  } else {
+    render(tweetFakeArr);
+  }
 }
 
 let tweetText = document.getElementById("inputText");
@@ -224,8 +230,6 @@ function render(data) {
 // let isShowAll = true;
 // let isFilter = false;
 function showAll() {
-  //showAll = true;
-  //console.log("here");
   render(tweetArr);
 }
 
@@ -271,7 +275,6 @@ let logInButton = document.getElementById("loginBtn");
 let logOutbtn = document.getElementById("logOut");
 
 function logIn(e) {
-  e.preventDefault();
   // console.log(document.getElementById("userInputName"));
 
   let userNameInput = document.getElementById("userInputName").value;
@@ -284,6 +287,7 @@ function logIn(e) {
     closeForm("myForm");
     fetchData();
     render(tweetArr);
+    e.preventDefault();
   }
 }
 
