@@ -1,11 +1,11 @@
 let tweetArr = [];
 let isLogin = false;
+let tweet = [];
 // let id;
 
-if (localStorage.getItem("tweetArray") !== null) {
-  tweetArr = JSON.parse(localStorage.getItem("tweetArray"));
-}
-
+// if (localStorage.getItem("tweetArray") !== null) {
+//  tweetArr = JSON.parse(localStorage.getItem("tweetArray"));
+//}
 async function fetchData() {
   if (isLogin == false) {
     return;
@@ -16,13 +16,13 @@ async function fetchData() {
   let response = await fetch(url);
   let data = await response.json();
   let tweetFakeArr = data.arrayApi;
-  let tweet = [];
-  if (tweetArr.length !== 0) {
-    tweet = tweetArr.concat(tweetFakeArr);
-    render(tweet);
-  } else {
-    render(tweetFakeArr);
-  }
+
+  // if (tweetArr.length !== 0) {
+  tweetArr = tweetArr.concat(tweetFakeArr);
+  render(tweetArr);
+  // } else {
+  //  render(tweetFakeArr);
+  // }
 }
 
 let tweetText = document.getElementById("inputText");
@@ -41,11 +41,8 @@ let likeText = "";
 let hashTags = [];
 
 let onUserInput = () => {
-  console.log("string");
   let textLength = tweetText.innerText.length;
   numCharRemain = MAX_NUM_CHARS - textLength;
-  console.log(textLength);
-  console.log(numCharRemain);
   render(tweetArr);
 };
 
@@ -221,10 +218,10 @@ function render(data) {
   tagText.innerHTML = tagHTML;
   tweetSection.innerHTML = tweetHTML;
   numOfTweets.innerHTML = `Tweets:<span class="text-success"> ${
-    tweetArr.length
+    data.length
   } </span>`;
 
-  localStorage.setItem("tweetArray", JSON.stringify(tweetArr));
+  //localStorage.setItem("tweetArray", JSON.stringify(tweetArr));
 }
 
 // let isShowAll = true;
@@ -241,6 +238,9 @@ function filterTags(tag) {
         return item;
       }
     }
+    //numOfTweets.innerHTML = `Tweets:<span class="text-success"> ${
+    //tweetFilteredByTags.length
+    //} </span>`;
   });
 
   render(tweetFilteredByTags);
@@ -261,6 +261,7 @@ tweetButton.addEventListener("click", generatePost);
 
 function openForm() {
   if (isLogin) {
+    isLogin = false;
     window.location.reload();
   } else {
     document.getElementById("myForm").style.display = "block";
@@ -278,10 +279,13 @@ function logIn(e) {
   // console.log(document.getElementById("userInputName"));
 
   let userNameInput = document.getElementById("userInputName").value;
+  let quote = document.getElementById("quote");
   // console.log(userNameInput);
   let displayName = document.getElementById("userName");
   if (userNameInput !== "") {
     displayName.innerHTML = userNameInput;
+    quote.innerHTML =
+      "The best for preparation tomorrow is doing you best today.";
     isLogin = true;
     logOutbtn.innerHTML = "LOG OUT";
     closeForm("myForm");
