@@ -10,7 +10,8 @@ async function fetchData() {
   if (isLogin == false) {
     return;
   }
-  let url = `https://api.myjson.com/bins/14eeja`;
+  let url = `https://api.myjson.com/bins/9zso6 `;
+  // https://api.myjson.com/bins/14eeja
 
   let response = await fetch(url);
   let data = await response.json();
@@ -154,14 +155,14 @@ function render(data) {
 
     tweetHTML += `<div class="card">
               <div class="card-body">
-                <span><img class="img-radius" src="img/sampleava.jpg"></span>
-                <span class="card-title">${userName}</span>
+                <span><img class="img-radius" src="img/testava1.jpg"></span>
+                <span class="card-title h6 font-weight-bold">${userName}</span>
                 <h6 class="card-subtitle my-3 text-muted">${moment(
                   item.time
                 ).format("DD-MM-YY hh:mm:ss A")} <span>(posted ${moment(
       item.time
     ).fromNow()})</h6>
-                <p class="card-text border">
+                <p class="card-text border h5">
                    ${item.tweet} 
               
                    </p>
