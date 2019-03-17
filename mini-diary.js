@@ -1,15 +1,23 @@
 let tweetArr = [];
+let isLogin = false;
 // let id;
 
 if (localStorage.getItem("tweetArray") !== null) {
   tweetArr = JSON.parse(localStorage.getItem("tweetArray"));
 }
-// let a = tweetArr.map(item => item.id);
-// let b = a.pop();
-// id = b + 1;
-// } else {
-//   id = 0;
-// }
+//
+async function fetchData() {
+  if (isLogin == false) {
+    return;
+  }
+  let url = `https://api.myjson.com/bins/14eeja`;
+
+  let response = await fetch(url);
+  let data = await response.json();
+  tweetArr = data.arrayApi;
+  render(tweetArr);
+}
+
 let tweetText = document.getElementById("inputText");
 const MAX_NUM_CHARS = 140;
 let numCharRemain = MAX_NUM_CHARS;
@@ -50,6 +58,9 @@ function extractTags(str) {
   return tags;
 }
 function generatePost() {
+  if (isLogin == false) {
+    return;
+  }
   let valueInput = tweetText.innerText;
   if (valueInput === "") {
     alert("pls enter");
@@ -116,20 +127,13 @@ function retweetFunction(id) {
   render(tweetArr);
 }
 
-// function createHashtag(string) {
-//   let hashTagText = [];
-//   if (string.indexOf("#") == 0) {
-//     hashTagText = string.match(/#(\w+)/g);
-//     if (hashTagText.length === string.length)
-//       return ` <a href=""> ${hashTagText} </a>`;
-//   }
-//   if (hashTagText.length < string.length) {
-//     return ` <a href=""> ${hashTagText} </a>` + "abc";
-//   } else return `<p> ${string}</p>`;
 // }
 let tagText = document.getElementById("hashTagHTML");
 
 function render(data) {
+  if (isLogin == false) {
+    return;
+  }
   let userName = document.getElementById("userInputName").value;
   tweetHTML = "";
   tagHTML = "";
@@ -158,10 +162,14 @@ function render(data) {
       item.time
     ).fromNow()})</h6>
                 <p class="card-text border">
-                   ${item.tweet}
-                </p>
+                   ${item.tweet} 
+              
+                   </p>
                 <p>
-                <a href='javascript:void();'>${item.hashTag.map(k => k)}</a>
+                ${item.hashTag.map(
+                  k => `<a href="javascript:void();">${k}</a>`
+                )}
+                
                 </p>
                 <div class="d-flex justify-content-between">
                 <div class="d-flex justify-content-between">
@@ -169,9 +177,9 @@ function render(data) {
                 <a href="javascript:void();" onclick='toggleLike(${index})'>${likeText}</a>
                 </div>
                 <a href="#"  class="card-link"> <img src="img/commenticon.png"></a>
-                <span class="card-link" onclick=retweetFunction(${
+                <a href="javascript:void();" class="card-link" onclick=retweetFunction(${
                   item.id
-                })><img src="img/retweet.png"></span>
+                })><img src="img/retweet.png"></a>
                 <a href="#" class="card-link"> <img src="img/staricon.png"></a>
                 </div>
 
@@ -222,7 +230,14 @@ function showAll() {
 
 function filterTags(tag) {
   //isFilter == true;
-  let tweetFilteredByTags = tweetArr.filter(item => item.hashTag == tag);
+  let tweetFilteredByTags = tweetArr.filter(item => {
+    for (let i = 0; i < item.hashTag.length; i++) {
+      if (item.hashTag[i] == tag) {
+        return item;
+      }
+    }
+  });
+
   render(tweetFilteredByTags);
 }
 
@@ -240,7 +255,11 @@ tweetText.addEventListener("input", onUserInput);
 tweetButton.addEventListener("click", generatePost);
 
 function openForm() {
-  document.getElementById("myForm").style.display = "block";
+  if (isLogin) {
+    window.location.reload();
+  } else {
+    document.getElementById("myForm").style.display = "block";
+  }
 }
 
 function closeForm() {
@@ -248,19 +267,24 @@ function closeForm() {
 }
 
 let logInButton = document.getElementById("loginBtn");
+let logOutbtn = document.getElementById("logOut");
 
 function logIn(e) {
   e.preventDefault();
   // console.log(document.getElementById("userInputName"));
+
   let userNameInput = document.getElementById("userInputName").value;
   // console.log(userNameInput);
   let displayName = document.getElementById("userName");
   if (userNameInput !== "") {
     displayName.innerHTML = userNameInput;
+    isLogin = true;
+    logOutbtn.innerHTML = "LOG OUT";
     closeForm("myForm");
     render(tweetArr);
   }
 }
 
 logInButton.addEventListener("click", logIn);
-render(tweetArr);
+fetchData();
+// render(tweetArr);
