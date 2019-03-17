@@ -281,10 +281,11 @@ function logIn(e) {
     isLogin = true;
     logOutbtn.innerHTML = "LOG OUT";
     closeForm("myForm");
+    fetchData();
     render(tweetArr);
   }
 }
 
 logInButton.addEventListener("click", logIn);
-fetchData();
+
 // render(tweetArr);
