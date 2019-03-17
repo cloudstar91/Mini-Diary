@@ -177,9 +177,9 @@ function render(data) {
                 <a href="javascript:void();" onclick='toggleLike(${index})'>${likeText}</a>
                 </div>
                 <a href="#"  class="card-link"> <img src="img/commenticon.png"></a>
-                <a href="javascript:void();" class="card-link" onclick=retweetFunction(${
+                <a href="javascript:void();" class="card-link" onclick='retweetFunction(${
                   item.id
-                })><img src="img/retweet.png"></a>
+                })'><img src="img/retweet.png"></a>
                 <a href="#" class="card-link"> <img src="img/staricon.png"></a>
                 </div>
 
