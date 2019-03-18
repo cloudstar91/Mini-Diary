@@ -287,6 +287,7 @@ function logIn(e) {
   if (userNameInput !== "") {
     displayName.innerHTML = userNameInput;
     quote.innerHTML =
+<<<<<<< HEAD
       "The best for preparation tomorrow is doing you best today.";
     userImg.innerHTML = `<img class="card-img-top " src="img/sampleava.jpg" alt="Card image cap" />`;
     tweetImg.innerHTML = `<img
@@ -294,6 +295,9 @@ function logIn(e) {
                   src="img/testava.jpg"
                   alt="ava"
               />`;
+=======
+      "The best for preparation tomorrow is doing your best today.";
+>>>>>>> 8d141460abda21d6764ea88e325fd422defdbfce
     isLogin = true;
     logOutbtn.innerHTML = "LOG OUT";
     closeForm("myForm");
