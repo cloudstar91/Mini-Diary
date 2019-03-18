@@ -285,7 +285,7 @@ function logIn(e) {
   if (userNameInput !== "") {
     displayName.innerHTML = userNameInput;
     quote.innerHTML =
-      "The best for preparation tomorrow is doing you best today.";
+      "The best for preparation tomorrow is doing your best today.";
     isLogin = true;
     logOutbtn.innerHTML = "LOG OUT";
     closeForm("myForm");
