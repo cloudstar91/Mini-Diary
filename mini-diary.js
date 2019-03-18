@@ -280,12 +280,20 @@ function logIn(e) {
 
   let userNameInput = document.getElementById("userInputName").value;
   let quote = document.getElementById("quote");
+  let userImg = document.getElementById("userAva");
+  let tweetImg = document.getElementById("tweetAva");
   // console.log(userNameInput);
   let displayName = document.getElementById("userName");
   if (userNameInput !== "") {
     displayName.innerHTML = userNameInput;
     quote.innerHTML =
       "The best for preparation tomorrow is doing you best today.";
+    userImg.innerHTML = `<img class="card-img-top " src="img/sampleava.jpg" alt="Card image cap" />`;
+    tweetImg.innerHTML = `<img
+                  class="img-radius rounded float-left"
+                  src="img/testava.jpg"
+                  alt="ava"
+              />`;
     isLogin = true;
     logOutbtn.innerHTML = "LOG OUT";
     closeForm("myForm");
